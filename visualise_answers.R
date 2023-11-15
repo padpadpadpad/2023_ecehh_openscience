@@ -43,7 +43,7 @@ label_wrap_mod <- function (x, width){
 }
 
 # load in the data ECEHH
-d <- read_excel("ECEHH 2023 Open Research Questions(1-11).xlsx")
+d <- read_excel("ECEHH 2023 Open Research Questions.xlsx")
 
 # make dataframe for what people would include in a grant application ####
 d_grant <- select(d, starts_with("When writing")) %>%
@@ -79,7 +79,7 @@ ggplot(d_grant, aes(forcats::fct_reorder(measure, -n), prop, fill = measure)) +
   labs(title = 'What "metrics" would you include in a grant application?',
        x = '',
        y = 'Proportion of total respondents', 
-       caption = 'Data is comprised of 11 respondents\nNote: measures <10% are not plotted') +
+       caption = 'Data is comprised of 17 respondents\nNote: measures <10% are not plotted') +
   ylim(c(0,1))
 
 # save plot
@@ -115,7 +115,7 @@ ggplot(d_publish, aes(forcats::fct_reorder(measure, -n), prop, fill = measure)) 
   labs(title = 'When you are choosing where to publish, what do you consider?',
        x = '',
        y = 'Proportion of total respondents', 
-       caption = 'Data is comprised of 11 respondents\nNote: measures <10% are not plotted') +
+       caption = 'Data is comprised of 17 respondents\nNote: measures <10% are not plotted') +
   ylim(c(0,1))
 
 # save plot
@@ -163,7 +163,7 @@ ggplot(d_datasharing, aes(forcats::fct_reorder(measure, -n), prop, fill = measur
   labs(title = 'How do you share your data most regularly',
        x = '',
        y = 'Proportion of total respondents', 
-       caption = 'Data is comprised of 11 respondents\nNote: measures <10% are not plotted') +
+       caption = 'Data is comprised of 17 respondents\nNote: measures <10% are not plotted') +
   ylim(c(0,1))
 
 # save plot
@@ -175,6 +175,12 @@ select(d, starts_with("Have you ever published the code")) %>%
   tally() %>%
   mutate(prop = n / sum(n))
  
+select(d, starts_with("Do you actively make")) %>%
+  group_by_all() %>%
+  tally() %>%
+  mutate(prop = n / sum(n))
+
+
 # have you ever pre-registered a study
 select(d, starts_with("Have you ever pre-re")) %>%
   group_by_all() %>%
